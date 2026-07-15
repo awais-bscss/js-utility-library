@@ -25,7 +25,7 @@ js-utility-library/
 |-----------|--------|--------------------------------------------------|
 | `groupBy` | ✅ Done | Groups array items by a string key or callback   |
 | `flatten` | 🔲 TODO | Flattens nested arrays to a specified depth       |
-| `unique`  | 🔲 TODO | Returns unique values from an array               |
+| `unique`  | ✅ Done | Returns unique values from an array               |
 | `sortBy`  | 🔲 TODO | Sorts array items by a key or comparator          |
 | `chunk`   | 🔲 TODO | Splits an array into chunks of a given size       |
 
