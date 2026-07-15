@@ -12,6 +12,7 @@ This library is part of the **Frontend Engineering Internship — Month 1** week
 js-utility-library/
 ├── src/
 │   ├── arrays/
+│   │   ├── flatten.js
 │   │   ├── groupBy.js
 │   │   └── unique.js
 │   └── sorting/
@@ -27,7 +28,7 @@ js-utility-library/
 | Utility   | Status | Description                                      |
 |-----------|--------|--------------------------------------------------|
 | `groupBy` | ✅ Done | Groups array items by a string key or callback   |
-| `flatten` | 🔲 TODO | Flattens nested arrays to a specified depth       |
+| `flatten` | ✅ Done | Flattens nested arrays to a specified depth       |
 | `unique`  | ✅ Done | Returns unique values from an array               |
 | `sortBy`  | ✅ Done | Sorts array items by a key or comparator (moved to `sorting/`) |
 | `chunk`   | 🔲 TODO | Splits an array into chunks of a given size       |
@@ -85,6 +86,19 @@ sort(users, "age"); // sorted by age ascending
 
 // sort by callback
 sort(users, (u) => u.name.length); // sorted by name length
+```
+
+```js
+import flatten from "./src/arrays/flatten.js";
+
+// fully flatten
+flatten([1, [2, [3, [4]]]]); // [1, 2, 3, 4]
+
+// flatten to depth 1
+flatten([1, [2, [3, [4]]]], 1); // [1, 2, [3, [4]]]
+
+// flatten to depth 2
+flatten([1, [2, [3, [4]]]], 2); // [1, 2, 3, [4]]
 ```
 
 ## Setup
