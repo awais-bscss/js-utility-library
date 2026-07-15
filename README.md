@@ -11,8 +11,11 @@ This library is part of the **Frontend Engineering Internship — Month 1** week
 ```
 js-utility-library/
 ├── src/
-│   └── arrays/
-│       └── groupBy.js
+│   ├── arrays/
+│   │   ├── groupBy.js
+│   │   └── unique.js
+│   └── sorting/
+│       └── sort.js
 ├── package.json
 └── README.md
 ```
@@ -26,7 +29,7 @@ js-utility-library/
 | `groupBy` | ✅ Done | Groups array items by a string key or callback   |
 | `flatten` | 🔲 TODO | Flattens nested arrays to a specified depth       |
 | `unique`  | ✅ Done | Returns unique values from an array               |
-| `sortBy`  | 🔲 TODO | Sorts array items by a key or comparator          |
+| `sortBy`  | ✅ Done | Sorts array items by a key or comparator (moved to `sorting/`) |
 | `chunk`   | 🔲 TODO | Splits an array into chunks of a given size       |
 
 ### Objects
@@ -36,6 +39,12 @@ js-utility-library/
 | `deepClone`          | 🔲 TODO | Creates a deep copy of an object             |
 | `objectComparison`   | 🔲 TODO | Deep equality check between two objects      |
 | `transformations`    | 🔲 TODO | Object key/value transformation utilities    |
+
+### Sorting
+
+| Utility | Status | Description                                          |
+|---------|--------|------------------------------------------------------|
+| `sort`  | ✅ Done | Sorts arrays by key/callback with asc/desc order     |
 
 ## Usage
 
@@ -55,6 +64,27 @@ groupBy(users, "role");
 // group by callback
 groupBy(users, (user) => (user.name.length > 3 ? "long" : "short"));
 // { short: [{ name: "Ali", ... }], long: [{ name: "Sara", ... }, { name: "Usman", ... }] }
+```
+
+```js
+import sort from "./src/sorting/sort.js";
+
+// sort primitives
+sort([3, 1, 2]); // [1, 2, 3]
+
+// sort descending
+sort([3, 1, 2], undefined, "desc"); // [3, 2, 1]
+
+// sort by object key
+const users = [
+  { name: "Usman", age: 28 },
+  { name: "Ali", age: 22 },
+  { name: "Sara", age: 25 },
+];
+sort(users, "age"); // sorted by age ascending
+
+// sort by callback
+sort(users, (u) => u.name.length); // sorted by name length
 ```
 
 ## Setup
