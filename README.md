@@ -18,7 +18,8 @@ js-utility-library/
 │   │   └── unique.js
 │   ├── objects/
 │   │   ├── deepClone.js
-│   │   └── objectComparison.js
+│   │   ├── objectComparison.js
+│   │   └── transformations.js
 │   └── sorting/
 │       └── sort.js
 ├── package.json
@@ -43,7 +44,7 @@ js-utility-library/
 |----------------------|--------|----------------------------------------------|
 | `deepClone`          | ✅ Done | Creates a deep copy of an object             |
 | `objectComparison`   | ✅ Done | Deep equality check between two objects      |
-| `transformations`    | 🔲 TODO | Object key/value transformation utilities    |
+| `transformations`    | ✅ Done | Object key/value transformation utilities    |
 
 ### Sorting
 
@@ -168,6 +169,28 @@ objectComparison(objA, objC); // false
 // Handles arrays, Dates, and RegExps too
 objectComparison([1, 2, [3]], [1, 2, [3]]); // true
 objectComparison(new Date("2026-07-16"), new Date("2026-07-16")); // true
+```
+
+```js
+import { mapKeys, mapValues, pick, omit } from "./src/objects/transformations.js";
+
+const user = { firstName: "Ali", lastName: "Khan", age: 25 };
+
+// mapKeys: change keys to uppercase
+mapKeys(user, (val, key) => key.toUpperCase()); 
+// { FIRSTNAME: "Ali", LASTNAME: "Khan", AGE: 25 }
+
+// mapValues: format values
+mapValues(user, (val, key) => typeof val === "string" ? val.toUpperCase() : val * 2);
+// { firstName: "ALI", lastName: "KHAN", age: 50 }
+
+// pick: keep only specified keys
+pick(user, ["firstName", "age"]);
+// { firstName: "Ali", age: 25 }
+
+// omit: discard specified keys
+omit(user, ["age"]);
+// { firstName: "Ali", lastName: "Khan" }
 ```
 
 ## Setup
