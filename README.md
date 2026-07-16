@@ -22,6 +22,7 @@ js-utility-library/
 │   │   └── transformations.js
 │   └── sorting/
 │       └── sort.js
+├── index.js
 ├── package.json
 └── README.md
 ```
@@ -53,6 +54,15 @@ js-utility-library/
 | `sort`  | ✅ Done | Sorts arrays by key/callback with asc/desc order     |
 
 ## Usage
+
+You can import utilities using named imports from the root entry point (`index.js`) or import them individually from their source files:
+
+```js
+// Import from the main entry point (recommended)
+import { groupBy, unique, sort, deepClone, objectComparison, pick } from "./index.js";
+```
+
+### Individual Imports Example:
 
 ```js
 import groupBy from "./src/arrays/groupBy.js";
