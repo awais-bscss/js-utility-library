@@ -8,8 +8,7 @@ function groupBy(array, key) {
     throw new TypeError("Key must be a string or a function");
   }
 
-  // if key is a function use it directly, otherwise access the property
-  const resolver = typeof key === "function" ? key : (item) => item[key];
+  const resolver = typeof key === "function" ? key : (item) => item?.[key];
 
   return array.reduce((grouped, item) => {
     const groupKey = resolver(item);

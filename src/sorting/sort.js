@@ -23,7 +23,7 @@ function sort(array, key, order = "asc") {
     throw new TypeError("Key must be a string or a function");
   }
 
-  const resolver = typeof key === "function" ? key : (item) => item[key];
+  const resolver = typeof key === "function" ? key : (item) => item?.[key];
 
   return [...array].sort((a, b) => {
     const valA = resolver(a);

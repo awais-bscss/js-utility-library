@@ -13,7 +13,7 @@ function unique(array, key) {
     throw new TypeError("Key must be a string or a function");
   }
 
-  const resolver = typeof key === "function" ? key : (item) => item[key];
+  const resolver = typeof key === "function" ? key : (item) => item?.[key];
   const seen = new Set();
 
   return array.filter((item) => {
