@@ -16,6 +16,8 @@ js-utility-library/
 │   │   ├── flatten.js
 │   │   ├── groupBy.js
 │   │   └── unique.js
+│   ├── objects/
+│   │   └── deepClone.js
 │   └── sorting/
 │       └── sort.js
 ├── package.json
@@ -38,7 +40,7 @@ js-utility-library/
 
 | Utility              | Status | Description                                  |
 |----------------------|--------|----------------------------------------------|
-| `deepClone`          | 🔲 TODO | Creates a deep copy of an object             |
+| `deepClone`          | ✅ Done | Creates a deep copy of an object             |
 | `objectComparison`   | 🔲 TODO | Deep equality check between two objects      |
 | `transformations`    | 🔲 TODO | Object key/value transformation utilities    |
 
@@ -132,6 +134,24 @@ chunk([1, 2, 3, 4, 5, 6], 3); // [[1, 2, 3], [4, 5, 6]]
 
 // default size = 1
 chunk([1, 2, 3]); // [[1], [2], [3]]
+```
+
+```js
+import deepClone from "./src/objects/deepClone.js";
+
+const original = {
+  name: "Ali",
+  address: { city: "Lahore", zip: 54000 },
+  hobbies: ["coding", "reading"],
+  joined: new Date("2025-01-01"),
+};
+
+const clone = deepClone(original);
+clone.address.city = "Karachi";
+clone.hobbies.push("gaming");
+
+console.log(original.address.city); // "Lahore" — original unchanged
+console.log(original.hobbies); // ["coding", "reading"] — original unchanged
 ```
 
 ## Setup
