@@ -68,6 +68,25 @@ groupBy(users, (user) => (user.name.length > 3 ? "long" : "short"));
 ```
 
 ```js
+import unique from "./src/arrays/unique.js";
+
+// primitive deduplication
+unique([1, 2, 2, 3, 3, 3]); // [1, 2, 3]
+
+// unique by object key
+const users = [
+  { id: 1, name: "Ali" },
+  { id: 2, name: "Sara" },
+  { id: 1, name: "Ali" },
+];
+unique(users, "id"); // [{ id: 1, name: "Ali" }, { id: 2, name: "Sara" }]
+
+// unique by callback
+unique(["hello", "world", "hi"], (word) => word.length);
+// ["hello", "hi"] — first occurrence of each length kept
+```
+
+```js
 import sort from "./src/sorting/sort.js";
 
 // sort primitives
