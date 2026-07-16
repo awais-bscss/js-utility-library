@@ -17,7 +17,8 @@ js-utility-library/
 │   │   ├── groupBy.js
 │   │   └── unique.js
 │   ├── objects/
-│   │   └── deepClone.js
+│   │   ├── deepClone.js
+│   │   └── objectComparison.js
 │   └── sorting/
 │       └── sort.js
 ├── package.json
@@ -41,7 +42,7 @@ js-utility-library/
 | Utility              | Status | Description                                  |
 |----------------------|--------|----------------------------------------------|
 | `deepClone`          | ✅ Done | Creates a deep copy of an object             |
-| `objectComparison`   | 🔲 TODO | Deep equality check between two objects      |
+| `objectComparison`   | ✅ Done | Deep equality check between two objects      |
 | `transformations`    | 🔲 TODO | Object key/value transformation utilities    |
 
 ### Sorting
@@ -152,6 +153,21 @@ clone.hobbies.push("gaming");
 
 console.log(original.address.city); // "Lahore" — original unchanged
 console.log(original.hobbies); // ["coding", "reading"] — original unchanged
+```
+
+```js
+import objectComparison from "./src/objects/objectComparison.js";
+
+const objA = { name: "Ali", details: { age: 25, active: true } };
+const objB = { name: "Ali", details: { age: 25, active: true } };
+const objC = { name: "Ali", details: { age: 25, active: false } };
+
+objectComparison(objA, objB); // true
+objectComparison(objA, objC); // false
+
+// Handles arrays, Dates, and RegExps too
+objectComparison([1, 2, [3]], [1, 2, [3]]); // true
+objectComparison(new Date("2026-07-16"), new Date("2026-07-16")); // true
 ```
 
 ## Setup
