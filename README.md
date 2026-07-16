@@ -146,6 +146,9 @@ chunk([1, 2, 3, 4, 5, 6], 3); // [[1, 2, 3], [4, 5, 6]]
 
 // default size = 1
 chunk([1, 2, 3]); // [[1], [2], [3]]
+
+// chunk a string into substrings
+chunk("optimus", 3); // ["opt", "imu", "s"]
 ```
 
 ```js
