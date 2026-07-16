@@ -12,6 +12,7 @@ This library is part of the **Frontend Engineering Internship — Month 1** week
 js-utility-library/
 ├── src/
 │   ├── arrays/
+│   │   ├── chunk.js
 │   │   ├── flatten.js
 │   │   ├── groupBy.js
 │   │   └── unique.js
@@ -31,7 +32,7 @@ js-utility-library/
 | `flatten` | ✅ Done | Flattens nested arrays to a specified depth       |
 | `unique`  | ✅ Done | Returns unique values from an array               |
 | `sortBy`  | ✅ Done | Sorts array items by a key or comparator (moved to `sorting/`) |
-| `chunk`   | 🔲 TODO | Splits an array into chunks of a given size       |
+| `chunk`   | ✅ Done | Splits an array into chunks of a given size       |
 
 ### Objects
 
@@ -118,6 +119,19 @@ flatten([1, [2, [3, [4]]]], 1); // [1, 2, [3, [4]]]
 
 // flatten to depth 2
 flatten([1, [2, [3, [4]]]], 2); // [1, 2, 3, [4]]
+```
+
+```js
+import chunk from "./src/arrays/chunk.js";
+
+// chunk into pairs
+chunk([1, 2, 3, 4, 5], 2); // [[1, 2], [3, 4], [5]]
+
+// chunk into groups of 3
+chunk([1, 2, 3, 4, 5, 6], 3); // [[1, 2, 3], [4, 5, 6]]
+
+// default size = 1
+chunk([1, 2, 3]); // [[1], [2], [3]]
 ```
 
 ## Setup
