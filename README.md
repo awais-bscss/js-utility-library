@@ -1,230 +1,194 @@
 # JS Utility Library
 
-A lightweight, zero-dependency JavaScript utility library built from scratch. No Lodash.
+A collection of lightweight, vanilla JavaScript utility functions. Written from scratch with a focus on code readability, solid error handling, and zero external dependencies.
 
-## About
+This library is a great fit if you need common array, object, and sorting helpers but want to avoid the bundle size bloat of Lodash.
 
-This library is part of the **Frontend Engineering Internship — Month 1** weekly assignments. Each utility is hand-written with a focus on clean code, proper error handling, and production-ready standards.
+## Features
+
+- **Zero Dependencies**: Pure vanilla JavaScript to keep your bundles small.
+- **Modern ESM**: Built using ES Modules for native tree-shaking support in Vite, Webpack, and Rollup.
+- **Strict Validations**: Rejects invalid parameters early by throwing standard TypeErrors instead of failing silently.
+- **Modular Design**: Every utility is isolated in its own folder with its own code and documentation.
 
 ## Project Structure
 
-```
+```text
 js-utility-library/
+├── examples/
+│   ├── chunk.js
+│   ├── deepClone.js
+│   ├── flatten.js
+│   ├── groupBy.js
+│   ├── objectComparison.js
+│   ├── sort.js
+│   ├── transformations.js
+│   └── unique.js
 ├── src/
+│   ├── helpers.js
 │   ├── arrays/
-│   │   ├── chunk.js
-│   │   ├── flatten.js
-│   │   ├── groupBy.js
-│   │   └── unique.js
+│   │   ├── chunk/
+│   │   │   ├── chunk.js
+│   │   │   └── README.md
+│   │   ├── flatten/
+│   │   │   ├── flatten.js
+│   │   │   └── README.md
+│   │   ├── groupBy/
+│   │   │   ├── groupBy.js
+│   │   │   └── README.md
+│   │   └── unique/
+│   │       ├── unique.js
+│   │       └── README.md
 │   ├── objects/
-│   │   ├── deepClone.js
-│   │   ├── objectComparison.js
-│   │   └── transformations.js
+│   │   ├── deepClone/
+│   │   │   ├── deepClone.js
+│   │   │   └── README.md
+│   │   ├── objectComparison/
+│   │   │   ├── objectComparison.js
+│   │   │   └── README.md
+│   │   └── transformations/
+│   │       ├── transformations.js
+│   │       └── README.md
 │   └── sorting/
-│       └── sort.js
+│       └── sort/
+│           ├── sort.js
+│           └── README.md
 ├── index.js
 ├── package.json
 └── README.md
 ```
 
-## Utilities
+## API Reference
 
 ### Arrays
 
-| Utility   | Status | Description                                      |
-|-----------|--------|--------------------------------------------------|
-| `groupBy` | ✅ Done | Groups array items by a string key or callback   |
-| `flatten` | ✅ Done | Flattens nested arrays to a specified depth       |
-| `unique`  | ✅ Done | Returns unique values from an array               |
-| `sortBy`  | ✅ Done | Sorts array items by a key or comparator (moved to `sorting/`) |
-| `chunk`   | ✅ Done | Splits an array into chunks of a given size       |
+| Utility | Description | Documentation |
+| :--- | :--- | :--- |
+| `chunk` | Splits an array or string into chunks of a given size. | [Readme](./src/arrays/chunk/README.md) |
+| `flatten` | Flattens nested arrays recursively to a specified depth. | [Readme](./src/arrays/flatten/README.md) |
+| `groupBy` | Groups array items by a key or custom callback function. | [Readme](./src/arrays/groupBy/README.md) |
+| `unique` | Returns unique values from an array, optionally by key/callback. | [Readme](./src/arrays/unique/README.md) |
 
 ### Objects
 
-| Utility              | Status | Description                                  |
-|----------------------|--------|----------------------------------------------|
-| `deepClone`          | ✅ Done | Creates a deep copy of an object             |
-| `objectComparison`   | ✅ Done | Deep equality check between two objects      |
-| `transformations`    | ✅ Done | Object key/value transformation utilities    |
+| Utility | Description | Documentation |
+| :--- | :--- | :--- |
+| `deepClone` | Creates a deep copy of any value (nested structures, Dates, RegExps). | [Readme](./src/objects/deepClone/README.md) |
+| `objectComparison` | Performs a deep equality comparison between two values. | [Readme](./src/objects/objectComparison/README.md) |
+| `mapKeys` | Transforms object keys using a custom mapper function. | [Readme](./src/objects/transformations/README.md#mapkeys) |
+| `mapValues` | Transforms object values using a custom mapper function. | [Readme](./src/objects/transformations/README.md#mapvalues) |
+| `pick` | Creates a new object containing only the specified keys. | [Readme](./src/objects/transformations/README.md#pick) |
+| `omit` | Creates a new object excluding the specified keys. | [Readme](./src/objects/transformations/README.md#omit) |
 
 ### Sorting
 
-| Utility | Status | Description                                          |
-|---------|--------|------------------------------------------------------|
-| `sort`  | ✅ Done | Sorts arrays by key/callback with asc/desc order     |
+| Utility | Description | Documentation |
+| :--- | :--- | :--- |
+| `sort` | Sorts arrays by key or callback with configurable order. | [Readme](./src/sorting/sort/README.md) |
 
-## Usage
+## Installation
 
-You can import utilities using named imports from the root entry point (`index.js`) or import them individually from their source files:
-
-```js
-// Import from the main entry point (recommended)
-import { groupBy, unique, sort, deepClone, objectComparison, pick } from "./index.js";
-```
-
-### Individual Imports Example:
-
-```js
-import groupBy from "./src/arrays/groupBy.js";
-
-const users = [
-  { name: "Ali", role: "dev" },
-  { name: "Sara", role: "design" },
-  { name: "Usman", role: "dev" },
-];
-
-// group by property name
-groupBy(users, "role");
-// { dev: [{ name: "Ali", ... }, { name: "Usman", ... }], design: [{ name: "Sara", ... }] }
-
-// group by callback
-groupBy(users, (user) => (user.name.length > 3 ? "long" : "short"));
-// { short: [{ name: "Ali", ... }], long: [{ name: "Sara", ... }, { name: "Usman", ... }] }
-```
-
-```js
-import unique from "./src/arrays/unique.js";
-
-// primitive deduplication
-unique([1, 2, 2, 3, 3, 3]); // [1, 2, 3]
-
-// unique by object key
-const users = [
-  { id: 1, name: "Ali" },
-  { id: 2, name: "Sara" },
-  { id: 1, name: "Ali" },
-];
-unique(users, "id"); // [{ id: 1, name: "Ali" }, { id: 2, name: "Sara" }]
-
-// unique by callback
-unique(["hello", "world", "hi"], (word) => word.length);
-// ["hello", "hi"] — first occurrence of each length kept
-```
-
-```js
-import sort from "./src/sorting/sort.js";
-
-// sort primitives
-sort([3, 1, 2]); // [1, 2, 3]
-
-// sort descending
-sort([3, 1, 2], undefined, "desc"); // [3, 2, 1]
-
-// sort by object key
-const users = [
-  { name: "Usman", age: 28 },
-  { name: "Ali", age: 22 },
-  { name: "Sara", age: 25 },
-];
-sort(users, "age"); // sorted by age ascending
-
-// sort by callback
-sort(users, (u) => u.name.length); // sorted by name length
-```
-
-```js
-import flatten from "./src/arrays/flatten.js";
-
-// fully flatten
-flatten([1, [2, [3, [4]]]]); // [1, 2, 3, 4]
-
-// flatten to depth 1
-flatten([1, [2, [3, [4]]]], 1); // [1, 2, [3, [4]]]
-
-// flatten to depth 2
-flatten([1, [2, [3, [4]]]], 2); // [1, 2, 3, [4]]
-```
-
-```js
-import chunk from "./src/arrays/chunk.js";
-
-// chunk into pairs
-chunk([1, 2, 3, 4, 5], 2); // [[1, 2], [3, 4], [5]]
-
-// chunk into groups of 3
-chunk([1, 2, 3, 4, 5, 6], 3); // [[1, 2, 3], [4, 5, 6]]
-
-// default size = 1
-chunk([1, 2, 3]); // [[1], [2], [3]]
-
-// chunk a string into substrings
-chunk("optimus", 3); // ["opt", "imu", "s"]
-```
-
-```js
-import deepClone from "./src/objects/deepClone.js";
-
-const original = {
-  name: "Ali",
-  address: { city: "Lahore", zip: 54000 },
-  hobbies: ["coding", "reading"],
-  joined: new Date("2025-01-01"),
-};
-
-const clone = deepClone(original);
-clone.address.city = "Karachi";
-clone.hobbies.push("gaming");
-
-console.log(original.address.city); // "Lahore" — original unchanged
-console.log(original.hobbies); // ["coding", "reading"] — original unchanged
-```
-
-```js
-import objectComparison from "./src/objects/objectComparison.js";
-
-const objA = { name: "Ali", details: { age: 25, active: true } };
-const objB = { name: "Ali", details: { age: 25, active: true } };
-const objC = { name: "Ali", details: { age: 25, active: false } };
-
-objectComparison(objA, objB); // true
-objectComparison(objA, objC); // false
-
-// Handles arrays, Dates, and RegExps too
-objectComparison([1, 2, [3]], [1, 2, [3]]); // true
-objectComparison(new Date("2026-07-16"), new Date("2026-07-16")); // true
-```
-
-```js
-import { mapKeys, mapValues, pick, omit } from "./src/objects/transformations.js";
-
-const user = { firstName: "Ali", lastName: "Khan", age: 25 };
-
-// mapKeys: change keys to uppercase
-mapKeys(user, (val, key) => key.toUpperCase()); 
-// { FIRSTNAME: "Ali", LASTNAME: "Khan", AGE: 25 }
-
-// mapValues: format values
-mapValues(user, (val, key) => typeof val === "string" ? val.toUpperCase() : val * 2);
-// { firstName: "ALI", lastName: "KHAN", age: 50 }
-
-// pick: keep only specified keys
-pick(user, ["firstName", "age"]);
-// { firstName: "Ali", age: 25 }
-
-// omit: discard specified keys
-omit(user, ["age"]);
-// { firstName: "Ali", lastName: "Khan" }
-```
-
-## Setup
+Clone the repository directly into your project:
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/M-Awais/js-utility-library.git
 cd js-utility-library
 ```
 
-No dependencies needed — pure vanilla JavaScript with ES modules.
+Since there are no dependencies, you can start importing it immediately in a Node.js or browser environment.
 
-## Tech Stack
+## Usage
 
-- **Language:** JavaScript (ES6+)
-- **Module System:** ES Modules
-- **Dependencies:** None
+### Main Entry Import (Recommended)
+Import multiple helpers from the root entry point:
 
-## Author
+```js
+import { chunk, sort } from "./index.js";
 
-**M-Awais**
+const arr = [3, 1, 2];
+const sorted = sort(arr); // [1, 2, 3]
+```
+
+### Direct Import
+Import specific utilities individually to keep your bundle footprint as small as possible:
+
+```js
+import chunk from "./src/arrays/chunk/chunk.js";
+
+const parts = chunk("hello", 2); // ["he", "ll", "o"]
+```
+
+## Quick Examples
+
+### Chunk
+```js
+chunk([1, 2, 3, 4, 5], 2);
+// => [[1, 2], [3, 4], [5]]
+```
+
+### Flatten
+```js
+flatten([1, [2, [3, [4]]]], 2);
+// => [1, 2, 3, [4]]
+```
+
+### GroupBy
+```js
+groupBy([{ name: "Ali", role: "dev" }, { name: "Sara", role: "design" }], "role");
+// => { dev: [...], design: [...] }
+```
+
+### Unique
+```js
+unique([1, 2, 2, 3, 1]); 
+// => [1, 2, 3]
+```
+
+### DeepClone
+```js
+const copy = deepClone({ a: { b: 2 }, date: new Date() });
+```
+
+### ObjectComparison
+```js
+objectComparison({ a: 1, b: [2] }, { a: 1, b: [2] });
+// => true
+```
+
+### mapKeys
+```js
+mapKeys({ a: 1, b: 2 }, (val, key) => key.toUpperCase());
+// => { A: 1, B: 2 }
+```
+
+### mapValues
+```js
+mapValues({ a: 1, b: 2 }, (val) => val * 10);
+// => { a: 10, b: 20 }
+```
+
+### pick
+```js
+pick({ a: 1, b: 2, c: 3 }, ["a", "c"]);
+// => { a: 1, c: 3 }
+```
+
+### omit
+```js
+omit({ a: 1, b: 2, c: 3 }, ["b"]);
+// => { a: 1, c: 3 }
+```
+
+### Sort
+```js
+sort([3, 1, 2], undefined, "desc");
+// => [3, 2, 1]
+```
+
+## Error Handling
+
+All utilities validate parameters at runtime. If you pass an unexpected argument (e.g., passing a number to an array parameter, or an invalid sorting direction), the utility will throw a standard `TypeError` immediately with a helpful error message.
 
 ## License
 
-ISC
+This project is licensed under the ISC License. See `package.json` for details.
