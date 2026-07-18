@@ -64,7 +64,7 @@ objectComparison(NaN, NaN);
 
 // Comparing Date & RegExp elements
 objectComparison(new Date("2026-07-17"), new Date("2026-07-17")); // => true
-objectComparison(/abc/gi, /abc/gi); // => false (mismatched regex flags)
+objectComparison(/abc/gi, /abc/g); // => false (mismatched regex flags)
 
 // Type safety checks (mismatched types don't fail, they return false)
 objectComparison([1, 2], { 0: 1, 1: 2 }); // => false

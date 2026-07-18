@@ -37,7 +37,7 @@ function sort<T>(array: T[], key?: string | ((item: T) => any), order?: "asc" | 
 ## Returns
 
 - **Type**: `any[]`
-- **Description**: A new sorted array. The sorting is stable where possible, and elements are shallow-copied into the returned array.
+- **Description**: A new sorted array. The sorting is stable, and elements are shallow-copied into the returned array.
 
 ---
 

@@ -58,6 +58,9 @@ js-utility-library/
 └── README.md
 ```
 
+> [!NOTE]
+> Shared validation and key resolution logic lives in [helpers.js](./src/helpers.js) (internal, not part of the public API).
+
 ## API Reference
 
 ### Arrays
