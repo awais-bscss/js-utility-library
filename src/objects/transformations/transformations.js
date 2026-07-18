@@ -1,6 +1,5 @@
-// Object key/value transformation utilities
+// object transformation helpers — mapKeys, mapValues, pick, omit
 
-// Transform object keys using a custom mapper function
 export function mapKeys(object, iteratee) {
   if (object === null || typeof object !== "object") {
     throw new TypeError(`Expected an object, received ${typeof object}`);
@@ -18,7 +17,6 @@ export function mapKeys(object, iteratee) {
   return result;
 }
 
-// Transform object values using a custom mapper function
 export function mapValues(object, iteratee) {
   if (object === null || typeof object !== "object") {
     throw new TypeError(`Expected an object, received ${typeof object}`);
@@ -35,7 +33,7 @@ export function mapValues(object, iteratee) {
   return result;
 }
 
-// Create a new object containing only the specified keys
+// keeps only the keys you ask for
 export function pick(object, keys) {
   if (object === null || typeof object !== "object") {
     throw new TypeError(`Expected an object, received ${typeof object}`);
@@ -53,7 +51,7 @@ export function pick(object, keys) {
   return result;
 }
 
-// Create a new object excluding the specified keys
+// opposite of pick — drops the keys you don't want
 export function omit(object, keys) {
   if (object === null || typeof object !== "object") {
     throw new TypeError(`Expected an object, received ${typeof object}`);

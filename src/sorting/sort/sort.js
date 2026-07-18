@@ -1,8 +1,8 @@
-// Sorts an array, optionally by a key or callback, with configurable order
+// sorts an array with optional key/callback and asc/desc order
+import { validateArray, validateKey, createResolver } from "../../helpers.js";
+
 function sort(array, key, order = "asc") {
-  if (!Array.isArray(array)) {
-    throw new TypeError(`Expected an array, received ${typeof array}`);
-  }
+  validateArray(array);
 
   if (order !== "asc" && order !== "desc") {
     throw new TypeError(`Order must be "asc" or "desc", received "${order}"`);
@@ -10,7 +10,7 @@ function sort(array, key, order = "asc") {
 
   const direction = order === "asc" ? 1 : -1;
 
-  // no key provided, sort primitives directly
+  // no key? sort the raw values directly
   if (key === undefined) {
     return [...array].sort((a, b) => {
       if (a < b) return -1 * direction;
@@ -19,11 +19,9 @@ function sort(array, key, order = "asc") {
     });
   }
 
-  if (typeof key !== "string" && typeof key !== "function") {
-    throw new TypeError("Key must be a string or a function");
-  }
+  validateKey(key);
 
-  const resolver = typeof key === "function" ? key : (item) => item?.[key];
+  const resolver = createResolver(key);
 
   return [...array].sort((a, b) => {
     const valA = resolver(a);
